@@ -15,4 +15,4 @@ tiktoken
 numpy
 pandas
 requests
-tavily-python
+langchain-tavily
