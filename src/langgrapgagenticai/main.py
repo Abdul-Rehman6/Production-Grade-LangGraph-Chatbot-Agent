@@ -37,7 +37,6 @@ def load_langgrapg_agenticai_app():
             try:
                 graph = graph_builder.setup_graph(usecase)
                 DisplayresultStreamlit(usecase, graph, user_message).display_result_on_ui()
-                return
             except Exception as e:
                 st.error("ERROR: Graph set up failde {e}")
                 return
