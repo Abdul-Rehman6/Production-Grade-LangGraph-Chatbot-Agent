@@ -1,8 +1,11 @@
 import streamlit as st
+from dotenv import load_dotenv
 from src.langgrapgagenticai.ui.streamlitui.loadui import LoadStreamlitUI
 from src.langgrapgagenticai.LLMS.openai import OpenaiLLM
 from src.langgrapgagenticai.graph.graph import GraphBuilder
 from src.langgrapgagenticai.ui.streamlitui.display_result import DisplayresultStreamlit
+
+load_dotenv()
 
 def load_langgrapg_agenticai_app():
     """
