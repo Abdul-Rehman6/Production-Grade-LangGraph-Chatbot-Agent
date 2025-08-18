@@ -61,16 +61,22 @@ class GraphBuilder:
         
 
         ai_news_node = AiNewsNode(self.llm)
+        print("in the  ai_news_builder_graph")
+
         # nodes
         self.graph_builder.add_node("fetch_news",ai_news_node.fetch_news)
         self.graph_builder.add_node("summarize_news",ai_news_node.summarize_news)
         self.graph_builder.add_node("save_result",ai_news_node.save_result)
 
+        print("in the  ai_news_builder_graph after nodes")
+
         # edges
-        self.graph_builder.set_entry_point("fetch_news")     # replacement of .add_edge(START, "fetch_news")
+        self.graph_builder.add_edge(START, "fetch_news")     # replacement of .add_edge(START, "fetch_news")
         self.graph_builder.add_edge("fetch_news", "summarize_news")
         self.graph_builder.add_edge("summarize_news", "save_result")
         self.graph_builder.add_edge("save_result", END)
+
+        print("in the  ai_news_builder_graph after edges")
 
 
     def setup_graph(self, usecase):

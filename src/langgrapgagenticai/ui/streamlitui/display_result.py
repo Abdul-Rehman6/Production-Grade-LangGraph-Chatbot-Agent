@@ -39,17 +39,18 @@ class DisplayresultStreamlit:
                             with st.chat_message("assistant"):
                                 st.write(f"🔧 Tool `{msg.name}` returned:\n\n{msg.content}")
             
-        elif usecase == "AI News":
+        elif usecase == "Ai News":
             frequency = self.user_input
+            print("in the  Ai News usecase in displayui file frequency: ", frequency)
             with st.spinner("Fetching and summarizing news... ⏳"):
-                result = graph.invoke({"messages": frequency})
+                result = graph.invoke({"messages": [HumanMessage(content=frequency)]})
                 try:
                     # Read the markdown file
                     AI_NEWS_PATH = f"./AINews/{frequency.lower()}_summary.md"
                     with open(AI_NEWS_PATH, "r") as file:
                         markdown_content = file.read()
 
-                    # Display the markdown content in Streamlit
+                    # Display the markdown content in    Streamlit
                     st.markdown(markdown_content, unsafe_allow_html=True)
                 except FileNotFoundError:
                     st.error(f"News Not Generated or File not found: {AI_NEWS_PATH}")

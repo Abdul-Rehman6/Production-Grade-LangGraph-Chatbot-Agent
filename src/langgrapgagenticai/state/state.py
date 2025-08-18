@@ -6,4 +6,7 @@ class State(TypedDict):
     """
     Represent the structure of the state used in graph
     """
-    messages: Annotated[List, add_messages]        
+    messages: Annotated[List, add_messages]
+    news_data: str
+    summary: str
+    filename: str        

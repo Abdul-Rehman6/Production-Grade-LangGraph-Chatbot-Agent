@@ -11,8 +11,10 @@ class AiNewsNode:
         self.tavily = TavilyClient()
         # this is used to capture various steps in this file so that later can be used for steps shown
         self.state = {}
+        print("inside ainewsnode init")
 
-    def fetch_news(self, state: dict) -> dict:
+
+    def fetch_news(self, state: State)-> State:
         """
         Fetch AI news based on the specified frequency.
         Args:
@@ -20,6 +22,8 @@ class AiNewsNode:
         Returns:
         dict: Updated state with 'news_data' key containing fetched news.
         """
+        print("inside fetchnews")
+
 
         # in frontend i am doing this  ->> result = graph.invoke({"messages": frequency}) and getting here
         frequency = state['messages'][0].content.lower()    
@@ -39,10 +43,11 @@ class AiNewsNode:
 
         state['news_data'] = response.get('results', [])
         self.state['news_data'] = state['news_data']
+        # print("News Data node name fetch_news ", state['news_data'])
         return state
     
 
-    def summarize_news(self, state: dict) -> dict:
+    def summarize_news(self, state: State)-> State:
         """
         Summarize the fetched news using an LLM.
         
@@ -52,9 +57,9 @@ class AiNewsNode:
         Returns:
             dict: Updated state with 'summary' key containing the summarized news.
         """
-
+        print("inside summarize_news")
         news_items = self.state['news_data']
-
+        # print("News Data node name summarize_news ", news_items)
         prompt_template = ChatPromptTemplate.from_messages([
             ("system", """Summarize AI news articles into markdown format. For each item include:
             - Date in **YYYY-MM-DD** format in IST timezone
@@ -75,17 +80,19 @@ class AiNewsNode:
         response = self.llm.invoke(prompt_template.format(articles=articles_str))
         state['summary'] = response.content
         self.state['summary'] = state['summary']
-        return self.state
+        return state
     
-    def save_result(self,state):
+    def save_result(self,state: State)-> State:
+        print("inside save_results")
         frequency = self.state['frequency']
         summary = self.state['summary']
-        filename = f"./AINews/{frequency}_summary.md" # i can save this in pdf, csv or whatever i want.
+        filename = f"./AINews/{frequency.lower()}_summary.md" # i can save this in pdf, csv or whatever i want.
         with open(filename, 'w') as f:
             f.write(f"# {frequency.capitalize()} AI News Summary\n\n")
             f.write(summary)
         self.state['filename'] = filename
-        return self.state
+        state['filename'] = filename
+        return state
 
 
 

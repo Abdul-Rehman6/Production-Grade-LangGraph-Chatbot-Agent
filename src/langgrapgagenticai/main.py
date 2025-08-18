@@ -16,8 +16,9 @@ def load_langgrapg_agenticai_app():
     if not user_input:
         st.error("ERROR: Failed to load user input from UI")
 
-    if st.session_state.IsFetchButtonClicked:
-        user_message = st.session_state.timeframe
+    if st.session_state["IsFetchButtonClicked"]:
+        user_message = st.session_state["timeframe"]
+        print("in the  IsFetchButtonClicked and user_message: ", user_message)
     else:
         user_message = st.chat_input("Enter your message: ")
 
@@ -37,7 +38,7 @@ def load_langgrapg_agenticai_app():
                 return
 
             graph_builder = GraphBuilder(model=model)
-
+            print("Grapg has build")
             try:
                 graph = graph_builder.setup_graph(usecase)
                 DisplayresultStreamlit(usecase, graph, user_message).display_result_on_ui()
@@ -48,4 +49,3 @@ def load_langgrapg_agenticai_app():
         except Exception as e:
                 st.error("ERROR: Graph set up failde {e}")
                 return
-
