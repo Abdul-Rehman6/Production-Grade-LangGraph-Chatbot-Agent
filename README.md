@@ -1,6 +1,6 @@
 # 🤖 Agentic AI Chatbot with LangGraph
 
-A powerful, multi-functional AI chatbot application built with LangGraph and Streamlit that demonstrates various agentic AI capabilities including basic conversation, web-enabled search, and automated AI news aggregation.
+A powerful, multi-functional AI chatbot application built with LangGraph and Streamlit that demonstrates various agentic AI capabilities including basic conversation, web-enabled search, and automated AI news aggregation
 
 ## ✨ Features
 
