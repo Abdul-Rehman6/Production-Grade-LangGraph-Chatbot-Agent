@@ -277,4 +277,4 @@ For issues, questions, or suggestions:
 
 ---
 
-**Built with ❤️ using LangGraph, Streamlit, and OpenA**
+**Built with ❤️ using LangGraph, Streamlit, and OpenAI**
